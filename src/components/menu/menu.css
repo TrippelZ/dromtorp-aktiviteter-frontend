@@ -1,0 +1,142 @@
+@keyframes menu-open {
+    to {transform: translate(0%);}
+}
+
+@keyframes menu-close {
+    to {transform: translate(-100%);}
+}
+
+.menu {
+    width: 15vw;
+    height: 100vh;
+    background-color: var(--menu-background-color);
+    position: fixed;
+    left: 0;
+    z-index: 999;
+}
+
+@media screen and (max-width: 600px) {
+    .menu {
+        width: 40vw;
+    }
+}
+
+#menu-pagecover {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 100;
+    background-color: var(--hover-background-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    opacity: 0;
+}
+
+.menu-initial {
+    transform: translate(-100%);
+}
+
+.menu-inactive {
+    animation-name: menu-close;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    transform: translate(0%);
+}
+
+.menu-active {
+    animation-name: menu-open;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    transform: translate(-100%);
+}
+
+.menu-link {
+    padding: 20px 0 20px;
+    text-decoration: none;
+    color: var(--primary-color);
+    background-color: var(--menu-background-color);
+    border: none;
+    text-align: left;
+    display: block;
+}
+
+.menu-link:hover {
+    background-color: var(--hover-background-color);
+    border-bottom: solid var(--primary-color) 2px;
+    padding-bottom: 18px;
+}
+
+.menu-link h3 {
+    font-weight: unset;
+    padding-left: 10px;
+    margin: 0;
+}
+
+.menu-link-active {
+    text-decoration: underline;
+}
+
+.menu-link-active h3 {
+    font-weight: bold;
+}
+
+.menu-image {
+    height: 100%;
+    width: auto;
+    fill: var(--primary-color);
+}
+
+.menu-button {
+    height: 6vh;
+    margin: 0;
+    padding: 5px;
+    display: block;
+    border: 0;
+    border-radius: 5px;
+    background-color: var(--menu-background-color);
+    margin-right: auto;
+    margin-left: 10px;
+}
+
+.menu-button-open {
+    position: fixed;
+    z-index: 200;
+    background-color: var(--primary-background-color);
+}
+
+.menu-button-image {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    color: var(--primary-color);
+}
+
+@media(hover: hover) and (pointer: fine) {
+    .menu-button:hover {
+        background-color: var(--hover-background-color);
+    }
+    .menu-link-hover:hover {
+        border-bottom: solid var(--primary-color) 2px;
+        padding-bottom: 8px;
+    }
+
+    .menu-button-open:hover {
+        background-color: var(--menu-background-color);
+    }
+}
+
+.footer {
+    padding: 20px 0 20px;
+    color: var(--primary-color);
+    background-color: var(--menu-background-color);
+    border: none;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    font-size: 0.75em;
+    text-align: center;
+    width: 100%;
+}
