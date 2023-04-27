@@ -25,10 +25,14 @@ html, body {
 }
 
 .default-sidebar-margin {
-  margin-left:  calc(6vh + 20px);
-  margin-right: calc(6vh + 20px);
+  margin: 0px calc(6vh + 20px) 0px calc(6vh + 20px);
 }
 
 .default-margin {
   margin: 0 10px 0 10px;
+}
+
+.content-title {
+  margin: 0;
+  padding: 5px;
 }
