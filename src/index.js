@@ -1,34 +1,52 @@
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import './index.css';
 import './colors.css';
 import HomePage from './pages/homePage/homePage';
 import NoPage from './pages/noPage/noPage';
-import Menu from './components/menu/menu';
+import { ValidateSession } from './api';
+
+const ValidationLoader = async () => {
+  const validSession = await ValidateSession()
+  
+  if (validSession.Error) {
+    return {
+      valid: false,
+      error: validSession.Error
+    }
+  }
+  return {
+    valid: true,
+    userId: validSession
+  }
+}
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+      <Route path="/" element={<HomePage />} loader={ValidationLoader} />
+      <Route index element={<HomePage />} loader={ValidationLoader} />
+
+      <Route path="/home" element={<HomePage />} loader={ValidationLoader} />
+
+      <Route path="/user/:userId" element={<NoPage loader={ValidationLoader} />} />
+      <Route path="/user/:userId/activities" element={<NoPage />} loader={ValidationLoader} />
+
+      <Route path="/activities" element={<NoPage />} loader={ValidationLoader} />
+      <Route path="/activities/:activityId" element={<NoPage />} loader={ValidationLoader} />
+
+      <Route path="/activities/create" element={<NoPage />} loader={ValidationLoader} />
+      <Route path="/activities/:activityId/configure" element={<NoPage />} loader={ValidationLoader} />
+
+      <Route path="/login" element={<NoPage />} loader={ValidationLoader} />
+      <Route path="/register" element={<NoPage />} loader={ValidationLoader} />
+
+      <Route path="*" element={<NoPage />} loader={ValidationLoader} />
+    </>
+  )
+);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
-    <Menu />
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route index element={<HomePage />} />
-
-      <Route path="/home" element={<HomePage />} />
-
-      <Route path="/user/:userId" element={<NoPage />} />
-      <Route path="/user/:userId/activities" element={<NoPage />} />
-
-      <Route path="/activities" element={<NoPage />} />
-      <Route path="/activities/:activityId" element={<NoPage />} />
-
-      <Route path="/activities/create" element={<NoPage />} />
-      <Route path="/activities/:activityId/configure" element={<NoPage />} />
-
-      <Route path="/login" element={<NoPage />} />
-      <Route path="/register" element={<NoPage />} />
-
-      <Route path="*" element={<NoPage />} />
-    </Routes>
-  </BrowserRouter>
+  <RouterProvider router={router} />
 );
