@@ -5,6 +5,7 @@ import './colors.css';
 import HomePage from './pages/homePage/homePage';
 import NoPage from './pages/noPage/noPage';
 import { ValidateSession } from './api';
+import LoginPage from './pages/loginPage/loginPage';
 
 const ValidationLoader = async () => {
   const validSession = await ValidateSession()
@@ -38,7 +39,7 @@ const router = createBrowserRouter(
       <Route path="/activities/create" element={<NoPage />} loader={ValidationLoader} />
       <Route path="/activities/:activityId/configure" element={<NoPage />} loader={ValidationLoader} />
 
-      <Route path="/login" element={<NoPage />} loader={ValidationLoader} />
+      <Route path="/login" element={<LoginPage />} loader={ValidationLoader} />
       <Route path="/register" element={<NoPage />} loader={ValidationLoader} />
 
       <Route path="*" element={<NoPage />} loader={ValidationLoader} />
