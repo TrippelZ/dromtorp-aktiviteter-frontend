@@ -1,8 +1,15 @@
 #root {
     --primary-background-color: #f3f3f3;
-    --primary-color: #333333;
+    --primary-color: #1f1f1f;
+    --info-primary-color: #4d4d4d;
   
     --menu-background-color: #D8D8D8;
   
     --hover-background-color: #F6F6F6;
+
+    --input-container-background-color: #666666;
+    --input-background-color: #1f1f1f;
+    --input-border-color: #b8b8b8;
+    --input-border-active-color: #ffffff;
+    --input-error-color: rgb(255, 0, 0);
   }
