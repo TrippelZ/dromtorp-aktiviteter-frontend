@@ -27,6 +27,10 @@ Not like this code is any great in the first place where it will be useful for s
 The same thing I ask myself every day.
 
 It's a fancy thing that my teacher will like me to use. Employeers also like to see you having experience with these things.
+<br><br><br>
+I have grown to hate this more and more. Will the suffering ever end?
+<br><br>
+My [honest response](https://youtu.be/CQU50NDu6zg) to anyone telling me to use React.
 
 ## Backend code?
 You can find the [backend right here](https://github.com/TrippelZ/dromtorp-aktiviteter-backend)! ☜(ﾟヮﾟ☜)
