@@ -18,7 +18,9 @@ function HomePage() {
     <Menu />
 
     <div className="content default-sidebar-margin">
-      <h2 className="content-title">Drømtorp Aktiviteter!</h2>
+      <h1 className="content-title">Drømtorp Aktiviteter</h1>
+
+      
     </div>
     </>
   );
