@@ -1,7 +1,7 @@
-//const API_Address = "https://api.dromtorp-aktiviteter.com";
+//const API_ADDRESS = "https://api.dromtorp-aktiviteter.com";
 const API_ADDRESS = "http://127.0.0.1:3001";
 
-function ValidateSession() {
+export function ValidateSession() {
     return new Promise(async (resolve) => {
         const response = await fetch(API_ADDRESS+"/validate", {
             method: "POST",
@@ -11,15 +11,132 @@ function ValidateSession() {
             credentials: "include"
         });
 
-        const data = await response.json();
+        try {
+            const data = await response.json();
 
-        if (response.ok) {
-            resolve(data.userId);
+            if (response.ok) {
+                resolve(data.userId);
+                return;
+            }
+
+            resolve(data);
             return;
         }
-
-        resolve(data);
+        catch(error) {
+            resolve();
+            return;
+        }
     });
 }
 
-exports.ValidateSession = ValidateSession;
+export function LoginRequest(email, password) {
+    return new Promise(async (resolve) => {
+        const response = await fetch(API_ADDRESS+"/login", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        });
+
+        try {
+            const data = await response.json();
+
+            if (response.ok) {
+                resolve(data.userId);
+                return;
+            }
+
+            resolve(data);
+            return;
+        }
+        catch(error) {
+            resolve();
+            return;
+        }
+    });
+}
+
+export function SignupRequest(firstName, lastName, email, password) {
+    return new Promise(async (resolve) => {
+        const response = await fetch(API_ADDRESS+"/register", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                password: password
+            })
+        });
+
+        try {
+            const data = await response.json();
+
+            if (response.ok) {
+                resolve(data.userId);
+                return;
+            }
+
+            resolve(data);
+            return;
+        }
+        catch(error) {
+            resolve();
+            return;
+        }
+    });
+}
+
+export function GetActivities() {
+    return new Promise(async (resolve) => {
+        const response = await fetch(API_ADDRESS+"/activity", {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            credentials: "include"
+        });
+
+        try {
+            const data = await response.json();
+
+            resolve(data);
+            return;
+        }
+        catch(error) {
+            resolve();
+            return;
+        }
+    });
+}
+
+export function GetActivityById(activityID) {
+    return new Promise(async (resolve) => {
+        const response = await fetch(API_ADDRESS+"/activity/"+activityID, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            credentials: "include"
+        });
+
+        try {
+            const data = await response.json();
+
+            resolve(data);
+            return;
+        }
+        catch(error) {
+            resolve();
+            return;
+        }
+    });
+}
