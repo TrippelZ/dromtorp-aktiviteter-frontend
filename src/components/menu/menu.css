@@ -30,6 +30,7 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     opacity: 0;
+    display: none;
 }
 
 .menu-initial {

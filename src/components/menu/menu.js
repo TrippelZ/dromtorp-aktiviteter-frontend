@@ -12,8 +12,13 @@ function Menu() {
     function OpenMenu() {
         if (menuClass === "menu menu-active") return;
 
+        const pageCover = document.getElementById("menu-pagecover");
+
         SetMenuClass("menu menu-active");
-        document.getElementById("menu-pagecover").animate({
+        pageCover.classCheck = "menu menu-active";
+
+        pageCover.style.display = "block";
+        pageCover.animate({
           opacity: "0.5"
         }, {
           duration: 500,
@@ -24,13 +29,21 @@ function Menu() {
       function CloseMenu() {
         if (menuClass !== "menu menu-active") return;
 
+        const pageCover = document.getElementById("menu-pagecover");
+
         SetMenuClass("menu menu-inactive");
-        document.getElementById("menu-pagecover").animate({
+        pageCover.classCheck = "menu menu-inactive";
+        pageCover.animate({
           opacity: "0"
         }, {
           duration: 500,
           fill: "forwards"
         });
+
+        setTimeout(() => {
+          if (pageCover.classCheck === "menu menu-active") return;
+          pageCover.style.display = "none";
+        }, 500)
       }
 
     return (
