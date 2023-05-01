@@ -1,0 +1,117 @@
+.signup-page {
+    width:  100vw;
+    height: 100vh;
+}
+
+.signup-content {
+    position: absolute;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    justify-content: space-between;
+    justify-items: center;
+    align-items: center;
+}
+
+.signup-title {
+
+}
+
+.signup-form-container {
+    height: 75vh;
+    width: 30vw;
+    background-color: var(--input-container-background-color);
+    border-radius: 10px;
+    align-items: center;
+    justify-items: center;
+    color: var(--primary-background-color);
+}
+
+.signup-label {
+    display: inline-block;
+    width: 70%;
+    text-align: left;
+    margin-top: 3%;
+}
+
+.signup-input {
+    width: 70%;
+    padding: 2% 1%;
+    font-size: large;
+    border-radius: 10px;
+    border: solid 2px;
+    border-color: var(--input-border-color);
+    outline: none;
+    background-color: var(--input-background-color);
+    color: var(--primary-background-color);
+}
+
+.signup-input:focus {
+    border-color: var(--input-border-active-color);
+}
+
+.signup-error {
+    border-color: var(--input-error-color);
+}
+
+.signup-error-message {
+    display: inline-block;
+    width: 70%;
+    text-align: left;
+    color: var(--input-error-color);
+}
+
+.signup-submit {
+    width: 70%;
+    padding: 2% 1%;
+    font-size: large;
+    border-radius: 10px;
+    background-color: var(--input-border-active-color);
+    outline: none;
+    border: none;
+    margin-top: 3%;
+}
+
+.signup-submit:hover {
+    background-color: var(--input-border-color);
+}
+
+.signup-submit-enabled {
+    color: var(--input-background-color);
+}
+
+
+
+
+
+.signup-footer {
+    margin: 0;
+    padding-top: 10px;
+
+    min-width: 100vw;
+    height: 6vh;
+
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-top: auto;
+
+    text-align: center;
+
+    font-size: 0.75em;
+}
+
+.signup-footer-hr {
+    margin: 20px 15% 0 15%;
+}
