@@ -1,6 +1,6 @@
 .login-page {
     width:  100vw;
-    height: 100%;
+    height: 100vh;
 }
 
 .login-content {
@@ -12,8 +12,103 @@
     margin: 0;
     padding: 0;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    justify-content: space-between;
+    justify-items: center;
+    align-items: center;
 }
 
 .login-title {
-    
+
+}
+
+.login-form-container {
+    height: 45vh;
+    width: 25vw;
+    background-color: var(--input-container-background-color);
+    border-radius: 10px;
+    align-items: center;
+    justify-items: center;
+    color: var(--primary-background-color);
+}
+
+.login-label {
+    display: inline-block;
+    width: 70%;
+    text-align: left;
+    margin-top: 5%;
+}
+
+.login-input {
+    width: 70%;
+    padding: 2% 1%;
+    font-size: large;
+    border-radius: 10px;
+    border: solid 2px;
+    border-color: var(--input-border-color);
+    outline: none;
+    background-color: var(--input-background-color);
+    color: var(--primary-background-color);
+}
+
+.login-input:focus {
+    border-color: var(--input-border-active-color);
+}
+
+.login-error {
+    border-color: var(--input-error-color);
+}
+
+.login-error-message {
+    display: inline-block;
+    width: 70%;
+    text-align: left;
+    color: var(--input-error-color);
+}
+
+.login-submit {
+    width: 70%;
+    padding: 2% 1%;
+    font-size: large;
+    border-radius: 10px;
+    background-color: var(--input-border-active-color);
+    outline: none;
+    border: none;
+    margin-top: 5%;
+}
+
+.login-submit:hover {
+    background-color: var(--input-border-color);
+}
+
+.login-submit-enabled {
+    color: var(--input-background-color);
+}
+
+
+.login-footer {
+    margin: 0;
+    padding-top: 10px;
+
+    min-width: 100vw;
+    height: 6vh;
+
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-top: auto;
+
+    text-align: center;
+
+    font-size: 0.75em;
+}
+
+.login-footer-hr {
+    margin: 20px 15% 0 15%;
 }
