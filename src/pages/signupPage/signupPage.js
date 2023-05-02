@@ -177,7 +177,7 @@ function SignupPage() {
 
         <div className="signup-form-container">
           <h2 className="signup-form-title">Registrer deg nå for å se aktivitetene!</h2>
-          <form onSubmit={SignupAttempt}>
+          <form className="signup-form" onSubmit={SignupAttempt}>
             <label className="signup-label">Fornavn:</label>
             <input name="firstName" type="text" required className={(!firstNameError && "signup-input") || "signup-input signup-error"} onChange={FirstNameChange} onBlur={FirstNameFocusLost} />
             <p className="signup-error-message" id="signup-error-firstName">{firstNameError}</p>
