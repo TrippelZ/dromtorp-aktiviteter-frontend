@@ -17,3 +17,7 @@
     left: 10px;
     visibility: hidden;
 }
+
+.activity-edit-icon-visible {
+    visibility: visible;
+}

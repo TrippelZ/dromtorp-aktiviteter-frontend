@@ -36,7 +36,7 @@ function ActivityPage() {
 
         {(sessionInfo.data && <>
         
-            <h2 className="activityPage-title">{sessionInfo.data.activityName}<EditIcon className="activity-edit-icon" /></h2>
+            <h2 className="activityPage-title">{sessionInfo.data.activityName}<EditIcon onClick={() => navigate("/activities/"+sessionInfo.data.activityID+"/configure")} className={!sessionInfo.canEdit ? "activity-edit-icon" : "activity-edit-icon activity-edit-icon-visible"} /></h2>
             <p>{sessionInfo.data.firstName + " " + sessionInfo.data.lastName}</p>
             <p>{sessionInfo.data.dateString}</p>
             <pre>{sessionInfo.data.activityDescription}</pre>
