@@ -100,7 +100,7 @@ function LoginPage() {
 
         <div className="login-form-container">
           <h2 className="login-form-title">Logg inn for å se aktivitetene!</h2>
-          <form onSubmit={LoginAttempt}>
+          <form className="login-form" onSubmit={LoginAttempt}>
             <label className="login-label">Epost:</label>
             <input name="email" type="email" required className={(!emailError && "login-input") || "login-input login-error"} onChange={EmailChange} onBlur={EmailFocusLost} />
             <p className="login-error-message" id="login-error-email">{emailError}</p>
