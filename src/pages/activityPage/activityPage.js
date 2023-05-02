@@ -14,7 +14,7 @@ function ActivityPage() {
         }
     }, [sessionInfo, navigate]);
 
-    if (sessionInfo.data.activityDate) {
+    if (sessionInfo.data && sessionInfo.data.activityDate) {
         const date = new Date(sessionInfo.data.activityDate);
 
         const day   = date.toLocaleString("nb-NO", {day: "2-digit"});

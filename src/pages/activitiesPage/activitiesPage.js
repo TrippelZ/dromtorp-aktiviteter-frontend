@@ -20,21 +20,25 @@ function ActivitiesPage() {
   const [filterValue, SetFilterValue] = useState("");
   const [filterType , SetFilterType ] = useState("activityName");
 
-  const activities = sessionInfo.data.filter(activity => activity.activityDate >= Date.now()).filter(activity => filterValue === "" ||
-  (filterType === "activityName" && activity.activityName.toLowerCase().includes(filterValue.toLowerCase())) ||
-  (filterType === "activityHost" && (activity.firstName + " " + activity.lastName).slice(0, filterValue.length).toLowerCase() === filterValue.toLowerCase()) ||
-  (filterType === "activityDate" && activity.activityDate === new Date(filterValue).getTime())).sort((a, b) => a[sortType] > b[sortType] ? 1 : -1).map(activity =>
-    <li key={activity.activityID}>
-      <Activity
-        id={activity.activityID}
-        title={activity.activityName}
-        host={activity.firstName + " " + activity.lastName}
-        date={activity.activityDate}
-        description={activity.activityDescription}
-      />
-    </li>
-  )
+  let activities;
 
+  if (sessionInfo.data) {
+    activities = sessionInfo.data.filter(activity => activity.activityDate >= Date.now()).filter(activity => filterValue === "" ||
+    (filterType === "activityName" && activity.activityName.toLowerCase().includes(filterValue.toLowerCase())) ||
+    (filterType === "activityHost" && (activity.firstName + " " + activity.lastName).slice(0, filterValue.length).toLowerCase() === filterValue.toLowerCase()) ||
+    (filterType === "activityDate" && activity.activityDate === new Date(filterValue).getTime())).sort((a, b) => a[sortType] > b[sortType] ? 1 : -1).map(activity =>
+      <li key={activity.activityID}>
+        <Activity
+          id={activity.activityID}
+          title={activity.activityName}
+          host={activity.firstName + " " + activity.lastName}
+          date={activity.activityDate}
+          description={activity.activityDescription}
+        />
+      </li>
+    )
+  }
+  
   return (
     <>
     <Menu />
@@ -66,7 +70,7 @@ function ActivitiesPage() {
       <br />
 
       {
-        (activities.length <= 0 && "Ingen aktiviteter funnet!") || <ul className="activities-list">{activities}</ul>
+        ((!activities || activities.length <= 0) && "Ingen aktiviteter funnet!") || <ul className="activities-list">{activities}</ul>
       }
       
     </div>
