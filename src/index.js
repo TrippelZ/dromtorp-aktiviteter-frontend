@@ -123,7 +123,7 @@ const ViewActivityLoader = async ({params}) => {
     valid: true,
     userId: validSession,
     data: activity,
-    canEdit: true
+    canEdit: permissionLevel >= 2
   }
 }
 
