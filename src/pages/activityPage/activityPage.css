@@ -6,11 +6,14 @@
 
 .activityPage-title {
     display: inline-block;
+    margin-left: 1.5em;
 }
 
 .activity-edit-icon {
     height: 1.5em;
+    width: 1.5em;;
     position: relative;
     top: 7px;
     left: 10px;
+    visibility: hidden;
 }
