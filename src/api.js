@@ -163,3 +163,49 @@ export function GetPermissionLevel(userID) {
         }
     });
 }
+
+export function JoinActivity(activityID) {
+    return new Promise(async (resolve) => {
+        const response = await fetch(API_ADDRESS+"/user/"+activityID+"/join", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            credentials: "include"
+        });
+
+        try {
+            const data = await response.json();
+
+            resolve(data);
+            return;
+        }
+        catch(error) {
+            resolve();
+            return;
+        }
+    });
+}
+
+export function QuitActivity(activityID) {
+    return new Promise(async (resolve) => {
+        const response = await fetch(API_ADDRESS+"/user/"+activityID+"/quit", {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            credentials: "include"
+        });
+
+        try {
+            const data = await response.json();
+
+            resolve(data);
+            return;
+        }
+        catch(error) {
+            resolve();
+            return;
+        }
+    });
+}
