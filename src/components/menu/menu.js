@@ -1,9 +1,11 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLoaderData, useLocation } from 'react-router-dom';
 import './menu.css';
 import { useState } from 'react';
 import { ReactComponent as Burger } from '../../assets/burger.svg';
 
 function Menu() {
+    const sessionInfo = useLoaderData();
+
     const [menuClass, SetMenuClass] = useState("menu menu-initial");
 
     const currentRoute = useLocation().pathname;
@@ -69,7 +71,7 @@ function Menu() {
             <h3>Hjemmeside</h3>
             </NavLink>
 
-            <NavLink to={"/user/"} end className={({ isActive }) =>
+            <NavLink to={"/user/"+(sessionInfo.valid && sessionInfo.userId)} end className={({ isActive }) =>
                 isActive ? "menu-link menu-link-active" : "menu-link"
             }>
             <h3>Min Profil</h3>
