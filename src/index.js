@@ -4,7 +4,7 @@ import './index.css';
 import './colors.css';
 import HomePage from './pages/homePage/homePage';
 import NoPage from './pages/noPage/noPage';
-import { GetActivities, GetActivityById, ValidateSession } from './api';
+import { GetActivities, GetActivityById, GetPermissionLevel, ValidateSession } from './api';
 import LoginPage from './pages/loginPage/loginPage';
 import SignupPage from './pages/signupPage/signupPage';
 import ActivitiesPage from './pages/activitiesPage/activitiesPage';
@@ -46,6 +46,7 @@ const ActivitiesLoader = async () => {
   if (!activities) {
     return {
       valid: true,
+      userId: validSession,
       data: []
     }
   }
@@ -53,12 +54,14 @@ const ActivitiesLoader = async () => {
   if (activities.Error) {
     return {
       valid: true,
+      userId: validSession,
       error: activities.Error
     }
   }
 
   return {
     valid: true,
+    userId: validSession,
     data: activities
   }
 }
@@ -79,6 +82,7 @@ const ViewActivityLoader = async ({params}) => {
   if (!activity) {
     return {
       valid: true,
+      userId: validSession,
       data: false
     }
   }
@@ -86,13 +90,40 @@ const ViewActivityLoader = async ({params}) => {
   if (activity.Error) {
     return {
       valid: true,
+      userId: validSession,
+      data: false,
       error: activity.Error
     }
   }
 
+
+  const permissionLevel = await GetPermissionLevel(validSession.userId);
+
+  if (!permissionLevel) {
+    return {
+      valid: true,
+      userId: validSession,
+      data: activity,
+      canEdit: false
+    }
+  }
+
+  if (permissionLevel.Error) {
+    return {
+      valid: true,
+      userId: validSession,
+      data: activity,
+      canEdit: false,
+      error: permissionLevel.Error
+    }
+  }
+
+
   return {
     valid: true,
-    data: activity
+    userId: validSession,
+    data: activity,
+    canEdit: true
   }
 }
 
