@@ -4,11 +4,12 @@ import './index.css';
 import './colors.css';
 import HomePage from './pages/homePage/homePage';
 import NoPage from './pages/noPage/noPage';
-import { GetActivities, GetActivityById, GetPermissionLevel, ValidateSession } from './api';
+import { GetActivities, GetActivityById, GetPermissionLevel, GetUserActivities, GetUserInfoFromId, ValidateSession } from './api';
 import LoginPage from './pages/loginPage/loginPage';
 import SignupPage from './pages/signupPage/signupPage';
 import ActivitiesPage from './pages/activitiesPage/activitiesPage';
 import ActivityPage from './pages/activityPage/activityPage';
+import ProfilePage from './pages/profilePage/profilePage';
 
 const ValidationLoader = async () => {
   const validSession = await ValidateSession();
@@ -33,7 +34,12 @@ const ValidationLoader = async () => {
 const ActivitiesLoader = async () => {
   const validSession = await ValidateSession();
 
-  if (validSession.Error) {
+  if (!validSession) {
+    return {
+      valid: false,
+      error: "Problemer med å nå serveren!"
+    }
+  } else if (validSession.Error) {
     return {
       valid: false,
       error: validSession.Error
@@ -69,7 +75,12 @@ const ActivitiesLoader = async () => {
 const ViewActivityLoader = async ({params}) => {
   const validSession = await ValidateSession();
 
-  if (validSession.Error) {
+  if (!validSession) {
+    return {
+      valid: false,
+      error: "Problemer med å nå serveren!"
+    }
+  } else if (validSession.Error) {
     return {
       valid: false,
       error: validSession.Error
@@ -127,6 +138,86 @@ const ViewActivityLoader = async ({params}) => {
   }
 }
 
+const ProfileLoader = async ({params}) => {
+  const validSession = await ValidateSession();
+
+  if (!validSession) {
+    return {
+      valid: false,
+      error: "Problemer med å nå serveren!"
+    }
+  } else if (validSession.Error) {
+    return {
+      valid: false,
+      error: validSession.Error
+    }
+  }
+
+  const userInfo = await GetUserInfoFromId(params.userId);
+
+  if (!userInfo) {
+    return {
+      valid: true,
+      userId: validSession,
+      error: "Bruker eksisterer ikke!"
+    }
+  } else if (userInfo.Error) {
+    return {
+      valid: true,
+      userId: validSession,
+      error: "Problemer med å skaffe bruker info!"
+    }
+  }
+
+  const activities = await GetUserActivities(params.userId);
+
+  if (!activities) {
+    return {
+      valid: true,
+      userId: validSession,
+      data: userInfo,
+      error: "Problemer med å skaffe aktiviteter!"
+    }
+  } else if (activities.Error) {
+    return {
+      valid: true,
+      userId: validSession,
+      data: userInfo,
+      error: activities.Error
+    }
+  }
+
+  const permissionLevel = await GetPermissionLevel(validSession.userId);
+
+  if (!permissionLevel) {
+    return {
+      valid: true,
+      userId: validSession,
+      canEdit: false,
+      data: userInfo,
+      error: activities.Error
+    }
+  }
+
+  if (permissionLevel.Error) {
+    return {
+      valid: true,
+      userId: validSession,
+      canEdit: false,
+      data: userInfo,
+      error: activities.Error
+    }
+  }
+
+  return {
+    valid: true,
+    userId: validSession,
+    canEdit: validSession === params.userId || permissionLevel >= 3,
+    data: userInfo,
+    activities: activities
+  }
+}
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -135,7 +226,7 @@ const router = createBrowserRouter(
 
       <Route path="/home" element={<HomePage />} loader={ValidationLoader} />
 
-      <Route path="/user/:userId" element={<NoPage />} />
+      <Route path="/user/:userId" element={<ProfilePage />} loader={ProfileLoader} />
       <Route path="/user/:userId/activities" element={<NoPage />} />
 
       <Route path="/activities" element={<ActivitiesPage />} loader={ActivitiesLoader} />
