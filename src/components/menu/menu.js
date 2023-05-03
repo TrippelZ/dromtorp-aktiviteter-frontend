@@ -1,9 +1,11 @@
-import { NavLink, useLoaderData, useLocation } from 'react-router-dom';
+import { NavLink, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import './menu.css';
 import { useState } from 'react';
 import { ReactComponent as Burger } from '../../assets/burger.svg';
+import { Logout } from '../../api';
 
 function Menu() {
+    const navigate    = useNavigate();
     const sessionInfo = useLoaderData();
 
     const [menuClass, SetMenuClass] = useState("menu menu-initial");
@@ -48,6 +50,12 @@ function Menu() {
         }, 500)
       }
 
+      async function Signout() {
+        await Logout()
+
+        navigate("/login");
+      }
+
     return (
         <>
         <button className="menu-button menu-button-open"
@@ -81,6 +89,10 @@ function Menu() {
                 isActive ? "menu-link menu-link-active" : "menu-link"
             }>
             <h3>Aktiviteter</h3>
+            </NavLink>
+
+            <NavLink onClick={Signout} className={"menu-link"}>
+            <h3>Logg Ut</h3>
             </NavLink>
 
             <footer className="footer">
