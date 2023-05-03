@@ -330,3 +330,34 @@ export function UpdateUserEmail(userID, email) {
         }
     });
 }
+
+export function UpdateUserPassword(userID, oldPassword, newPassword) {
+    return new Promise(async (resolve) => {
+        const response = await fetch(API_ADDRESS+"/user/"+userID+"/password", {
+            method: "PATCH",
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({
+                oldPassword: oldPassword,
+                newPassword: newPassword
+            })
+        });
+
+        if (response.ok) {
+            resolve(true);
+            return;
+        }
+
+        try {
+            const data = await response.json();
+
+            resolve(data);
+            return;
+        }
+        catch(error) {
+            resolve(false);
+        }
+    });
+}
