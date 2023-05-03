@@ -61,6 +61,20 @@ export function LoginRequest(email, password) {
     });
 }
 
+export function Logout() {
+    return new Promise(async (resolve) => {
+        await fetch(API_ADDRESS+"/logout", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            }
+        });
+
+        resolve();
+    });
+}
+
 export function SignupRequest(firstName, lastName, email, password) {
     return new Promise(async (resolve) => {
         const response = await fetch(API_ADDRESS+"/register", {
@@ -141,6 +155,29 @@ export function GetActivityById(activityID) {
     });
 }
 
+export function GetUserActivities(userID) {
+    return new Promise(async (resolve) => {
+        const response = await fetch(API_ADDRESS+"/user/"+userID+"/activities", {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            credentials: "include"
+        });
+
+        try {
+            const data = await response.json();
+
+            resolve(data);
+            return;
+        }
+        catch(error) {
+            resolve();
+            return;
+        }
+    });
+}
+
 export function GetPermissionLevel(userID) {
     return new Promise(async (resolve) => {
         const response = await fetch(API_ADDRESS+"/user/"+userID+"/permissions", {
@@ -191,6 +228,29 @@ export function QuitActivity(activityID) {
     return new Promise(async (resolve) => {
         const response = await fetch(API_ADDRESS+"/user/"+activityID+"/quit", {
             method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            credentials: "include"
+        });
+
+        try {
+            const data = await response.json();
+
+            resolve(data);
+            return;
+        }
+        catch(error) {
+            resolve();
+            return;
+        }
+    });
+}
+
+export function GetUserInfoFromId(userID) {
+    return new Promise(async (resolve) => {
+        const response = await fetch(API_ADDRESS+"/user/"+userID, {
+            method: "GET",
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
