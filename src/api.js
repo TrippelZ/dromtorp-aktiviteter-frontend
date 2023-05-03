@@ -269,3 +269,34 @@ export function GetUserInfoFromId(userID) {
         }
     });
 }
+
+export function UpdateUserName(userID, firstName, lastName) {
+    return new Promise(async (resolve) => {
+        const response = await fetch(API_ADDRESS+"/user/"+userID+"/name", {
+            method: "PATCH",
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({
+                firstName: firstName,
+                lastName: lastName
+            })
+        });
+
+        if (response.ok) {
+            resolve(true);
+            return;
+        }
+
+        try {
+            const data = await response.json();
+
+            resolve(data);
+            return;
+        }
+        catch(error) {
+            resolve(false);
+        }
+    });
+}
