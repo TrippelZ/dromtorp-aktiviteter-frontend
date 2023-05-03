@@ -10,6 +10,7 @@ import SignupPage from './pages/signupPage/signupPage';
 import ActivitiesPage from './pages/activitiesPage/activitiesPage';
 import ActivityPage from './pages/activityPage/activityPage';
 import ProfilePage from './pages/profilePage/profilePage';
+import ProfileEditPage from './pages/profileEditPage/profileEditPage';
 
 const ValidationLoader = async () => {
   const validSession = await ValidateSession();
@@ -218,6 +219,65 @@ const ProfileLoader = async ({params}) => {
   }
 }
 
+const ProfileEditLoader = async ({params}) => {
+  const validSession = await ValidateSession();
+
+  if (!validSession) {
+    return {
+      valid: false,
+      error: "Problemer med å nå serveren!"
+    }
+  } else if (validSession.Error) {
+    return {
+      valid: false,
+      error: validSession.Error
+    }
+  }
+
+  const userInfo = await GetUserInfoFromId(params.userId);
+
+  if (!userInfo) {
+    return {
+      valid: true,
+      userId: validSession,
+      error: "Bruker eksisterer ikke!"
+    }
+  } else if (userInfo.Error) {
+    return {
+      valid: true,
+      userId: validSession,
+      error: "Problemer med å skaffe bruker info!"
+    }
+  }
+
+  const permissionLevel = await GetPermissionLevel(validSession.userId);
+
+  if (!permissionLevel) {
+    return {
+      valid: true,
+      userId: validSession,
+      canEdit: false,
+      data: userInfo
+    }
+  }
+
+  if (permissionLevel.Error) {
+    return {
+      valid: true,
+      userId: validSession,
+      canEdit: false,
+      data: userInfo
+    }
+  }
+
+  return {
+    valid: true,
+    userId: validSession,
+    canEdit: validSession === params.userId || permissionLevel >= 3,
+    data: userInfo
+  }
+}
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -227,7 +287,7 @@ const router = createBrowserRouter(
       <Route path="/home" element={<HomePage />} loader={ValidationLoader} />
 
       <Route path="/user/:userId" element={<ProfilePage />} loader={ProfileLoader} />
-      <Route path="/user/:userId/activities" element={<NoPage />} />
+      <Route path="/user/:userId/configure" element={<ProfileEditPage />} loader={ProfileEditLoader} />
 
       <Route path="/activities" element={<ActivitiesPage />} loader={ActivitiesLoader} />
       <Route path="/activities/:activityId" element={<ActivityPage />} loader={ViewActivityLoader} />

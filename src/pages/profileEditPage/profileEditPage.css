@@ -1,0 +1,30 @@
+.profile-content {
+    width: 100vw;
+    height: 100%;
+    text-align: center;
+}
+
+.profile-edit-name-title, .profile-edit-email-title, .profile-edit-password-title {
+    display: inline-block;
+}
+
+.profile-title {
+    display: inline-block;
+    margin-left: 1.5em;
+}
+
+.profile-edit-return-icon {
+    height: 1.5em;
+    width: 1.5em;;
+    position: relative;
+    top: 7px;
+    left: 10px;
+}
+
+.profile-edit-icon-visible {
+    visibility: visible;
+}
+
+.profile-edit-error {
+    color: var(--input-error-color);
+}
