@@ -53,10 +53,7 @@ function ProfilePage() {
             <h3 className="profile-email-title">Epost:</h3> <p className="profile-email">{sessionInfo.data.email}</p>
             
             <h3 className="profile-activities-title">Bruker Aktiviteter</h3>
-
-            {console.log(sessionInfo)}
-
-
+            
 
             {activities ? <>
 
