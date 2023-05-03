@@ -300,3 +300,33 @@ export function UpdateUserName(userID, firstName, lastName) {
         }
     });
 }
+
+export function UpdateUserEmail(userID, email) {
+    return new Promise(async (resolve) => {
+        const response = await fetch(API_ADDRESS+"/user/"+userID+"/email", {
+            method: "PATCH",
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({
+                email: email
+            })
+        });
+
+        if (response.ok) {
+            resolve(true);
+            return;
+        }
+
+        try {
+            const data = await response.json();
+
+            resolve(data);
+            return;
+        }
+        catch(error) {
+            resolve(false);
+        }
+    });
+}
