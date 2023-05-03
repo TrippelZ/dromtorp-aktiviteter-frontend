@@ -12,4 +12,5 @@
     --input-border-color: #b8b8b8;
     --input-border-active-color: #ffffff;
     --input-error-color: rgb(255, 0, 0);
+    --input-success-color: rgb(0, 255, 0);
   }
