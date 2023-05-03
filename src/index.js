@@ -274,6 +274,7 @@ const ProfileEditLoader = async ({params}) => {
     valid: true,
     userId: validSession,
     canEdit: validSession === params.userId || permissionLevel >= 3,
+    isAdmin: permissionLevel >= 3,
     data: userInfo
   }
 }
