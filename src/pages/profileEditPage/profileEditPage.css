@@ -28,3 +28,7 @@
 .profile-edit-error {
     color: var(--input-error-color);
 }
+
+.profile-edit-success {
+    color: var(--input-success-color);
+}
