@@ -1,0 +1,27 @@
+.profile-content {
+    width: 100vw;
+    height: 100%;
+    text-align: center;
+}
+
+.profile-email-title, .profile-email {
+    display: inline-block;
+}
+
+.profile-title {
+    display: inline-block;
+    margin-left: 1.5em;
+}
+
+.profile-edit-icon {
+    height: 1.5em;
+    width: 1.5em;;
+    position: relative;
+    top: 7px;
+    left: 10px;
+    visibility: hidden;
+}
+
+.profile-edit-icon-visible {
+    visibility: visible;
+}
