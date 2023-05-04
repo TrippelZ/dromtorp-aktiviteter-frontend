@@ -1,0 +1,17 @@
+.activity-member {
+    border: solid black 2px;
+    border-radius: 15px;
+    height: 30px;
+    width: 300px;
+    background-color: var(--menu-background-color);
+    color: var(--primary-color);
+    cursor: pointer;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.member-name {
+    margin: 0;
+    padding: 5px 10px 5px 10px;
+    height: 100%;
+}
