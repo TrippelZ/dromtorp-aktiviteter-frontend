@@ -155,6 +155,29 @@ export function GetActivityById(activityID) {
     });
 }
 
+export function GetActivityMembers(activityID) {
+    return new Promise(async (resolve) => {
+        const response = await fetch(API_ADDRESS+"/activity/"+activityID+"/members", {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            credentials: "include"
+        });
+
+        try {
+            const data = await response.json();
+
+            resolve(data);
+            return;
+        }
+        catch(error) {
+            resolve();
+            return;
+        }
+    });
+}
+
 export function GetUserActivities(userID) {
     return new Promise(async (resolve) => {
         const response = await fetch(API_ADDRESS+"/user/"+userID+"/activities", {
