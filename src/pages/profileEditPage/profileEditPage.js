@@ -194,11 +194,13 @@ function ProfileEditPage() {
           <p className="profile-edit-error">{!passwordError ? "" : passwordError}</p>
           <p className="profile-edit-success">{!passwordSuccess ? "" : passwordSuccess}</p>
 
+          {/*}
           <br />
           <h3>Slett bruker:</h3>
           <input type="password" className="profile-delete-password" placeholder="Passord kreves for sletting!" onChange={(event) => SetDeleteConfirm(event.target.value)} />
           <button type="button" onClick={DeleteUser}>Slett</button>
           <p className="profile-edit-error">{!deleteError ? "" : deleteError}</p>
+        {*/}
         </> : <>
 
           <h2>{sessionInfo.error}</h2>
