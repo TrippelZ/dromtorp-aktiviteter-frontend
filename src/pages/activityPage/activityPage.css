@@ -21,3 +21,21 @@
 .activity-edit-icon-visible {
     visibility: visible;
 }
+
+.activity-button-error {
+    color: var(--input-error-color);
+}
+
+.activity-button-success {
+    color: var(--input-success-color);
+}
+
+.activity-members-title {
+    margin-bottom: 0;
+}
+
+.member-list {
+    display: inline-block;
+    list-style-type: none;
+    padding: 0;
+}
